@@ -1,38 +1,28 @@
 const gulp = require('gulp');
-const plumber = require('gulp-plumber');
 const sourcemaps = require('gulp-sourcemaps');
-const sass = require('gulp-sass');
+const sass = require('gulp-sass')(require('sass'));
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const server = require('browser-sync').create();
-const csso = require('gulp-csso');
 const rename = require('gulp-rename');
 const del = require('del');
 const webpackStream = require('webpack-stream');
 const webpackConfig = require('./webpack.config.js');
 
-const nunjucks = require('gulp-nunjucks');
-
 const html = () => {
   return gulp.src('source/html/*.html')
-  .pipe(nunjucks.compile())
   .pipe(gulp.dest('build'))
 };
 
 const css = () => {
   return gulp.src('source/sass/style.scss')
-      .pipe(plumber())
-      .pipe(sourcemaps.init())
-      .pipe(sass())
-      .pipe(postcss([autoprefixer({
-        grid: true,
-      })]))
-      .pipe(gulp.dest('build/css'))
-      .pipe(csso())
-      .pipe(rename('style.min.css'))
-      .pipe(sourcemaps.write('.'))
-      .pipe(gulp.dest('build/css'))
-      .pipe(server.stream());
+    .pipe(sourcemaps.init())
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(postcss([autoprefixer()]))
+    .pipe(rename('style.min.css'))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('build/css'))
+    .pipe(server.stream());
 };
 
 const js = () => {
