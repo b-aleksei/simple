@@ -15,7 +15,9 @@
     "js:fix": "eslint source/js/script.js --fix",
     "css:fix": "stylelint source/**/*.scss --fix"
   },
-  "precommit": [ "npm test" ],
+  "pre-commit": [
+    "test"
+  ],
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.14.5",
     "@babel/preset-env": "^7.14.8",
@@ -34,7 +36,6 @@
     "gulp-sass": "^5.0.0",
     "gulp-sourcemaps": "^3.0.0",
     "pre-commit": "^1.2.2",
-    "precommit": "^1.2.2",
     "sass": "^1.36.0",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0",
