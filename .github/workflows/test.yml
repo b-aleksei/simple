@@ -1,6 +1,9 @@
 name: Test
 
 on:
+  check_run:
+    types:
+      - completed
   pull_request:
     branches:
       - master
@@ -9,7 +12,7 @@ on:
       - master
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     strategy:
       matrix:
