@@ -1,0 +1,5 @@
+source/js/**/*.min.js
+source/js/vendor/*.js
+build/**/*.js
+gulpfile.js
+webpack.config.js
